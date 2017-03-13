@@ -1,0 +1,16 @@
+/*应用代码找虫插件*/
+apply plugin: 'findbugs'
+/*使用connectedAndroidTest：必须链接模拟器或真机*/
+task findbugs(type: FindBugs) {
+    ignoreFailures = true
+    effort = "default"
+    reportLevel = "medium"
+    excludeFilter = new File("${project.rootDir}/QA/findbugs/findbugs-filter.xml")
+    classes = files("${project.rootDir}/app/build/intermediates/classes")
+    source = fileTree('src/main/java/')
+    classpath = files()
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
